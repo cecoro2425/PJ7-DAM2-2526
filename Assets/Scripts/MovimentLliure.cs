@@ -54,7 +54,7 @@ public class MovimentLliure : MonoBehaviour
 
         if (velocidadY > 0)
         {
-            velocidadY -= Time.deltaTime;
+            velocidadY -= Time.deltaTime * tiempoSaltoMax;
         }
         
         transform.Translate (Vector3.up * velocidadY * Time.deltaTime);
