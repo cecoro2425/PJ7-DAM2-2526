@@ -3,11 +3,24 @@ using UnityEngine;
 
 public class FallingPlatform : MonoBehaviour
 {
-    public float fallDelay = 1.5f;
-    public float shakeDuration = 0.5f;
-    public float shakeAmount = 0.1f;
+    [Header("Timing")]
+    public float fallDelay = 1.0f;
+    public float shakeDuration = 0.6f;
+    public float respawnDelay = 2.5f;
+    public float respawnRiseHeight = 2f;
+    public float respawnSpeed = 2f;
+
+    [Header("Shake")]
+    public float shakeAmount = 0.05f;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip fallClip;
 
     private Rigidbody rb;
+    private AudioSource audioSource;
+    private Collider col;
+    private Renderer rend;
+
     private bool estaActivada = false;
     private Vector3 posInicial;
 
@@ -15,6 +28,11 @@ public class FallingPlatform : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
+
+        audioSource = GetComponent<AudioSource>();
+        col = GetComponent<Collider>();
+        rend = GetComponent<Renderer>();
+
         posInicial = transform.position;
     }
 
@@ -23,32 +41,71 @@ public class FallingPlatform : MonoBehaviour
         if (!estaActivada && collision.gameObject.CompareTag("Player"))
         {
             estaActivada = true;
-            StartCoroutine(ShakeAndFall());
+            StartCoroutine(PlatformRoutine());
         }
     }
 
-    IEnumerator ShakeAndFall()
+    IEnumerator PlatformRoutine()
     {
-        // Espera antes de empezar a temblar
         yield return new WaitForSeconds(fallDelay);
 
+        // ----- SACUDIDA PROGRESIVA -----
         float tiempo = 0f;
 
         while (tiempo < shakeDuration)
         {
-            float offsetX = Random.Range(-shakeAmount, shakeAmount);
-            float offsetZ = Random.Range(-shakeAmount, shakeAmount);
+            float intensidad = Mathf.Lerp(0, shakeAmount, tiempo / shakeDuration);
 
-            transform.position = posInicial + new Vector3(offsetX, 0, offsetZ);
+            float offsetX = Random.Range(-intensidad, intensidad);
+            transform.position = posInicial + new Vector3(offsetX, 0, 0);
 
             tiempo += Time.deltaTime;
             yield return null;
         }
 
-        // Restaurar posición exacta antes de caer
         transform.position = posInicial;
 
-        // Activar caída
+        // ----- SONIDO + CAÍDA -----
+        if (audioSource != null && fallClip != null)
+        {
+            audioSource.PlayOneShot(fallClip);
+        }
+
         rb.isKinematic = false;
+
+        // Esperar mientras cae
+        yield return new WaitForSeconds(respawnDelay);
+
+        // ----- DESAPARECER -----
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.isKinematic = true;
+
+        col.enabled = false;
+        rend.enabled = false;
+
+        // Teletransportar arriba (fuera de vista)
+        transform.position = posInicial + Vector3.up * respawnRiseHeight;
+
+        yield return new WaitForSeconds(0.5f);
+
+        // ----- REAPARICIÓN SUAVE -----
+        rend.enabled = true;
+
+        while (Vector3.Distance(transform.position, posInicial) > 0.01f)
+        {
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                posInicial,
+                respawnSpeed * Time.deltaTime
+            );
+
+            yield return null;
+        }
+
+        transform.position = posInicial;
+        col.enabled = true;
+
+        estaActivada = false;
     }
 }
