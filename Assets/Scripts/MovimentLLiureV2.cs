@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -88,6 +89,9 @@ public class MovimentLliure2 : MonoBehaviour
         {
             enSuelo = true;
             saltando = false;
+        }
+        if (other.gameObject.CompareTag("Aigua")){
+            Destroy(this.gameObject);
         }
     }
 }
