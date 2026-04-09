@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Floor
+  - Aigua
+  - Check
   layers:
   - Default
   - TransparentFX
