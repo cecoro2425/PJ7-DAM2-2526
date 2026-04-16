@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Floor
   - Aigua
-  - FakeWall
+  - Check
   layers:
   - Default
   - TransparentFX
