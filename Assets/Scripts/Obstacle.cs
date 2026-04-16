@@ -15,7 +15,7 @@ public class Obstacle : MonoBehaviour
             Debug.Log("CheckPoint: " + checkPoint);
             Debug.Log("GestionVidas: " + gestionVidas);
 
-            gestionVidas.disminuirVides();
+            gestionVidas.PerdreVida(1);
             player.position = checkPoint.position;
         }
     }
