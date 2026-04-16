@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
-public class MovimentLliure2 : MonoBehaviour
+public class MovimentDobleSalto : MonoBehaviour
 {
     [Header("Movimiento")]
     [SerializeField] private float velocitat = 8f;
@@ -11,6 +11,15 @@ public class MovimentLliure2 : MonoBehaviour
     [Header("Salto")]
     [SerializeField] private float fuerzaSalto = 8f;
     [SerializeField] private float tiempoSaltoMax = 0.25f;
+
+    [Header("Doble Salto")]
+    [SerializeField] private float gravedadNormal = -20f;
+    [SerializeField] private float gravedadPlaneo = -5f;
+    [SerializeField] private float impulsoFinal = 10f;
+    [SerializeField] private float duracionPlaneo = 0.6f;
+
+    private int saltosRestantes = 2;
+    private bool haciendoDobleSalto;
 
     [Header("Modelo (opcional)")]
     [SerializeField] private Transform modelo;
@@ -54,35 +63,43 @@ public class MovimentLliure2 : MonoBehaviour
 
     void Salto()
     {
-        // Inicio salto
-        if (Input.GetKeyDown(KeyCode.UpArrow) && enSuelo)
+    if (Input.GetKeyDown(KeyCode.UpArrow) && saltosRestantes > 0)
         {
+        if (saltosRestantes == 2)
+            {
+            // Primer salto normal
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, fuerzaSalto, 0);
-            saltando = true;
-            tiempoSalto = tiempoSaltoMax;
-            enSuelo = false;
-        }
-
-        // Mantener salto
-        if (Input.GetKey(KeyCode.UpArrow) && saltando)
-        {
-            if (tiempoSalto > 0)
-            {
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, fuerzaSalto, 0);
-                tiempoSalto -= Time.deltaTime;
             }
-            else
+        else
             {
-                saltando = false;
+            // Segundo salto estilo Yoshi
+            StartCoroutine(DobleSaltoYoshi());
             }
-        }
 
-        // Soltar botón corta salto
-        if (Input.GetKeyUp(KeyCode.UpArrow))
-        {
-            saltando = false;
+        saltosRestantes--;
+        enSuelo = false;
         }
     }
+
+    IEnumerator DobleSaltoYoshi()
+{
+    haciendoDobleSalto = true;
+
+    float tiempo = 0f;
+
+    // Fase 1: caída lenta (parábola invertida)
+    while (tiempo < duracionPlaneo)
+    {
+        rb.linearVelocity += Vector3.up * gravedadPlaneo * Time.deltaTime;
+        tiempo += Time.deltaTime;
+        yield return null;
+    }
+
+    // Fase 2: impulso final hacia arriba
+    rb.linearVelocity = new Vector3(rb.linearVelocity.x, impulsoFinal, 0);
+
+    haciendoDobleSalto = false;
+}
 
     private void OnCollisionEnter(Collision other)
     {
@@ -90,6 +107,7 @@ public class MovimentLliure2 : MonoBehaviour
         {
             enSuelo = true;
             saltando = false;
+            saltosRestantes = 2;
         }
         if (other.gameObject.CompareTag("Aigua")){
             Destroy(this.gameObject);

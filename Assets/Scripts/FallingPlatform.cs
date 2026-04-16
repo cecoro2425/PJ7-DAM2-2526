@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -56,7 +57,7 @@ public class FallingPlatform : MonoBehaviour
         {
             float intensidad = Mathf.Lerp(0, shakeAmount, tiempo / shakeDuration);
 
-            float offsetX = Random.Range(-intensidad, intensidad);
+            float offsetX = UnityEngine.Random.Range(-intensidad, intensidad);
             transform.position = posInicial + new Vector3(offsetX, 0, 0);
 
             tiempo += Time.deltaTime;
@@ -69,6 +70,7 @@ public class FallingPlatform : MonoBehaviour
         if (audioSource != null && fallClip != null)
         {
             audioSource.PlayOneShot(fallClip);
+            Console.WriteLine("Dummy");
         }
 
         rb.isKinematic = false;
