@@ -800,7 +800,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
   player: {fileID: 0}
   checkPoint: {fileID: 0}
-  gestionVidas2: {fileID: 0}
 --- !u!114 &265653386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4288,6 +4287,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d8cef22c03f58a9f8b1587958fb8b0a7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1138782985}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d8cef22c03f58a9f8b1587958fb8b0a7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1138782990}
   m_SourcePrefab: {fileID: 100100000, guid: d8cef22c03f58a9f8b1587958fb8b0a7, type: 3}
 --- !u!43 &702815985
 Mesh:
@@ -5552,6 +5554,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &1138782990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138782984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a997210990bcad45a25fe3b270c909b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Obstacle
+  player: {fileID: 1659469941}
+  checkPoint: {fileID: 1392064232}
 --- !u!1 &1208270743
 GameObject:
   m_ObjectHideFlags: 0
@@ -6026,6 +6042,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1310307620}
   m_CullTransparentMesh: 1
+--- !u!4 &1392064232 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -6808230217882836027, guid: 0712eb6726aa98a6a91feabdb710e342, type: 3}
+  m_PrefabInstance: {fileID: 405717557}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1426675643
 Mesh:
   m_ObjectHideFlags: 0
