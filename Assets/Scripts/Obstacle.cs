@@ -4,7 +4,7 @@ public class Obstacle : MonoBehaviour
 {
     [SerializeField] private Transform player;
     [SerializeField] private Transform checkPoint;
-    [SerializeField] private GestionVidas gestionVidas;
+    [SerializeField] private GestionVidas2 gestionVidas2;
 
 
     private void OnCollisionEnter(Collision other)
@@ -13,9 +13,9 @@ public class Obstacle : MonoBehaviour
         {
             Debug.Log("Player: " + player);
             Debug.Log("CheckPoint: " + checkPoint);
-            Debug.Log("GestionVidas: " + gestionVidas);
+            Debug.Log("GestionVidas2: " + gestionVidas2);
 
-            gestionVidas.PerdreVida(1);
+            gestionVidas2.PerdreVida(1);
             player.position = checkPoint.position;
         }
     }

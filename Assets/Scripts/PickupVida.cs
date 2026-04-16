@@ -8,7 +8,7 @@ public class PickupVida : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GestionVidas vidas = other.GetComponent<GestionVidas>();
+            GestionVidas2 vidas = other.GetComponent<GestionVidas2>();
 
             if (vidas != null)
             {
