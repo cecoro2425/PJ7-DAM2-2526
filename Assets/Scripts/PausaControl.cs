@@ -36,8 +36,8 @@ public class PausaControl : MonoBehaviour
     {
         Time.timeScale = 1f;
         pausado = false;
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        SceneManager.LoadScene("PruebaCC");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene("");
         
     }
     

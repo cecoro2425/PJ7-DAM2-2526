@@ -40,6 +40,7 @@ public class GestionVidas : MonoBehaviour
                 break;
             case 0:
                 imageVides.texture = texture4;
+                SceneManager.LoadScene(1);
                 break;
         }
         //imageVides.texture  = texture1;
