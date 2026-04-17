@@ -343,7 +343,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 153164206}
-  - component: {fileID: 153164205}
   - component: {fileID: 153164207}
   m_Layer: 0
   m_Name: ControlMusic
@@ -352,18 +351,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &153164205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 153164204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b4887c70a64bf64e94e9fe3c727bf64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ImageContainer
 --- !u!4 &153164206
 Transform:
   m_ObjectHideFlags: 0
@@ -2451,7 +2438,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 648201506}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f68638bb597ef5759aec179912ca0369, type: 3}
   m_Name: 
@@ -3491,6 +3478,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d8cef22c03f58a9f8b1587958fb8b0a7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1659469942}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d8cef22c03f58a9f8b1587958fb8b0a7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1659469943}
   m_SourcePrefab: {fileID: 100100000, guid: d8cef22c03f58a9f8b1587958fb8b0a7, type: 3}
 --- !u!1 &1208270743
 GameObject:
@@ -4390,6 +4380,27 @@ MonoBehaviour:
   fuerzaSalto: 8
   tiempoSaltoMax: 5
   suelo: {fileID: 0}
+--- !u!114 &1659469943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659469936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6036018c1de676f209a25ebe235ff518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GestionVidas2
+  vides: 3
+  textVides: {fileID: 417398089}
+  texture1: {fileID: 2800000, guid: d0d8c254ecc6169e4b5409647d8db245, type: 3}
+  texture2: {fileID: 2800000, guid: bb70469032bd255e7a38d0e5ae9dc413, type: 3}
+  texture3: {fileID: 2800000, guid: 7a95c38104214cb64a2b0e95bb3b43e0, type: 3}
+  texture4: {fileID: 2800000, guid: bb22f34fe68722fbcba8903ed445b084, type: 3}
+  imageVides: {fileID: 920468001}
+  player: {fileID: 1659469941}
+  tempsInvulnerable: 1
 --- !u!43 &1722180067
 Mesh:
   m_ObjectHideFlags: 0
