@@ -32,7 +32,7 @@ public class GestionVidas2 : MonoBehaviour
     if (vides <= 0)
     {
         vides = 0;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     ActualitzarUI();

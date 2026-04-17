@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class Patrulla : MonoBehaviour
 {
 private UnityEngine.AI.NavMeshAgent agent;
     public Transform[] puntsMoviment;
